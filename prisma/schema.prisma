@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  userId          Int         @id @default(autoincrement()) @map("user_id")
+  avatar          String?     @db.VarChar(255)
+  name            String      @db.VarChar(30)
+  email           String      @unique @db.VarChar(255)
+  telephone       String?     @db.VarChar(20)
+  description     String?     @db.VarChar(255)
+  passwordHash    String      @db.VarChar(255) @map("password_hash")
+
+  createdAt       DateTime    @default(now()) @db.Timestamp(6) @map("created_at")
+  updatedAt       DateTime    @updatedAt @db.Timestamp(6) @map("updated_at")
+
+  @@map("users")
+}
+
+model Store {
+  storeId         Int         @id @default(autoincrement()) @map("store_id")
+  avatar          String?     @db.VarChar(255)
+  name            String      @db.VarChar(30)
+  description     String?     @db.VarChar(255)
+
+  createdAt       DateTime    @default(now()) @db.Timestamp(6) @map("created_at")
+  updatedAt       DateTime    @updatedAt @db.Timestamp(6) @map("updated_at")
+
+  products        Product[]
+  categories      Category[]
+
+  @@map("stores")
+}
+
+model Product {
+  productId             Int               @id @default(autoincrement()) @map("product_id")
+  storeId               Int               @map("store_id")
+  title                 String            @db.VarChar(50)
+  price                 Decimal           @db.Decimal(18, 2) @default(0)
+  description           String?           @db.VarChar(255)
+  stock                 Int               @default(1)
+  categoryId            Int?              @map("category_id")
+  weightType            WeightType        @default(ABSOLUTE)
+  // variantOptions
+  // variantCombinations
+
+  status                ProductStatus     @default(UNAVAILABLE)
+  createdAt             DateTime          @default(now()) @db.Timestamp(6) @map("created_at")
+  updatedAt             DateTime          @updatedAt @db.Timestamp(6) @map("updated_at")
+
+  images                Image[]
+  store                 Store             @relation(fields: [storeId], references: [storeId])
+  category              Category?         @relation(fields: [categoryId], references: [categoryId])
+
+  @@map("products")
+}
+
+model Image {
+  imageId         Int         @id @default(autoincrement()) @map("image_id")
+  ownerId         Int         @map("owner_id")
+  title           String?     @db.VarChar(50)
+  description     String?     @db.VarChar(255)
+  url             String      @db.VarChar(255)
+
+  createdAt       DateTime    @default(now()) @db.Timestamp(6) @map("created_at")
+  updatedAt       DateTime    @updatedAt @db.Timestamp(6) @map("updated_at")
+
+  product         Product     @relation(fields: [ownerId], references: [productId])
+
+  @@map("images")
+}
+
+model Category {
+  categoryId      Int       @id @default(autoincrement()) @map("category_id")
+  storeId         Int       @map("store_id")
+  name            String    @db.VarChar(30)
+
+  products        Product[]
+  store           Store     @relation(fields: [storeId], references: [storeId])
+
+  @@map("categories")
+}
+
+enum ProductStatus {
+  AVAILABLE
+  PREORDER
+  UNAVAILABLE
+  ARCHIVED
+  REMOVED
+}
+
+enum WeightType {
+  RELATIVE
+  ABSOLUTE
+}
