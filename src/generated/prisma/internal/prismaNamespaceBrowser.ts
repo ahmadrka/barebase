@@ -54,6 +54,7 @@ export const ModelName = {
   User: 'User',
   UserSession: 'UserSession',
   UserVerification: 'UserVerification',
+  LoginProvider: 'LoginProvider',
   Store: 'Store',
   Member: 'Member',
   Product: 'Product',
@@ -119,6 +120,16 @@ export const UserVerificationScalarFieldEnum = {
 } as const
 
 export type UserVerificationScalarFieldEnum = (typeof UserVerificationScalarFieldEnum)[keyof typeof UserVerificationScalarFieldEnum]
+
+
+export const LoginProviderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  provider: 'provider',
+  providerId: 'providerId'
+} as const
+
+export type LoginProviderScalarFieldEnum = (typeof LoginProviderScalarFieldEnum)[keyof typeof LoginProviderScalarFieldEnum]
 
 
 export const StoreScalarFieldEnum = {

@@ -33,6 +33,11 @@ export type UserSession = Prisma.UserSessionModel
  */
 export type UserVerification = Prisma.UserVerificationModel
 /**
+ * Model LoginProvider
+ * 
+ */
+export type LoginProvider = Prisma.LoginProviderModel
+/**
  * Model Store
  * 
  */

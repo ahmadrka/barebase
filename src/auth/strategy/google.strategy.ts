@@ -15,8 +15,13 @@ export class GoogleStrategy {
           callbackURL: this.configService.getOrThrow('GOOGLE_CALLBACK_URL'),
           scope: ['profile', 'email'],
           prompt: 'select_account',
-        },
-        async (accessToken, refreshToken, profile, done) => {
+        } as any,
+        async (
+          accessToken: string,
+          refreshToken: string,
+          profile: any,
+          done: any,
+        ) => {
           try {
             const user = {
               email: profile.emails[0].value,

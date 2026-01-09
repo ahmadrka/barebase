@@ -47,37 +47,55 @@ export class StoresController {
   updateStore(
     @Body() updateDto: UpdateStoreDto,
     @Param('storeId') storeId: string,
+    @GetUser('userId') userId: string,
   ) {
-    return this.storesService.updateStore(updateDto, +storeId);
+    return this.storesService.updateStore(updateDto, +storeId, +userId);
   }
 
   @Delete(':storeId')
-  deleteStore(@Param('storeId') storeId: string) {
-    return this.storesService.deleteStore(+storeId);
+  deleteStore(
+    @Param('storeId') storeId: string,
+    @GetUser('userId') userId: string,
+  ) {
+    return this.storesService.deleteStore(+storeId, +userId);
   }
 
   // Invitation endpoint
   @Post(':storeId/invite-link')
-  createInviteLink(@Param('storeId') storeId: string) {
-    return this.storesService.createInviteLink(+storeId);
+  createInviteLink(
+    @Param('storeId') storeId: string,
+    @GetUser('userId') userId: string,
+  ) {
+    return this.storesService.createInviteLink(+storeId, +userId);
   }
 
   @Get(':storeId/invite-link')
-  getInviteLink(@Param('storeId') storeId: string) {
-    return this.storesService.getInviteLink(+storeId);
+  getInviteLink(
+    @Param('storeId') storeId: string,
+    @GetUser('userId') userId: string,
+  ) {
+    return this.storesService.getInviteLink(+storeId, +userId);
   }
 
   @Post(':storeId/invitations')
   createInvitation(
     @Body() invitationDto: InvitationDto,
     @Param('storeId') storeId: string,
+    @GetUser('userId') userId: string,
   ) {
-    return this.storesService.createInvitation(invitationDto, +storeId);
+    return this.storesService.createInvitation(
+      invitationDto,
+      +storeId,
+      +userId,
+    );
   }
 
   @Get(':storeId/invitations')
-  getInvitations(@Param('storeId') storeId: string) {
-    return this.storesService.getInvitations(+storeId);
+  getInvitations(
+    @Param('storeId') storeId: string,
+    @GetUser('userId') userId: string,
+  ) {
+    return this.storesService.getInvitations(+storeId, +userId);
   }
 
   @Delete(':storeId/invitations/:invitationId')
@@ -91,5 +109,14 @@ export class StoresController {
       +invitationId,
       +userId,
     );
+  }
+
+  // Get Store Info
+  @Get(':storeId/info')
+  getStoreInfo(
+    @Param('storeId') storeId: string,
+    @GetUser('userId') userId: string,
+  ) {
+    return this.storesService.getStoreInfo(+storeId, +userId);
   }
 }

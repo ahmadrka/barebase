@@ -116,4 +116,13 @@ export class ProductRepository {
       select: productSelections,
     });
   }
+
+  async getProductCount(storeId: number) {
+    return await this.prisma.product.count({
+      where: {
+        deletedAt: null,
+        storeId,
+      },
+    });
+  }
 }

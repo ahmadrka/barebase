@@ -387,6 +387,7 @@ export const ModelName = {
   User: 'User',
   UserSession: 'UserSession',
   UserVerification: 'UserVerification',
+  LoginProvider: 'LoginProvider',
   Store: 'Store',
   Member: 'Member',
   Product: 'Product',
@@ -407,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userSession" | "userVerification" | "store" | "member" | "product" | "category" | "productImage"
+    modelProps: "user" | "userSession" | "userVerification" | "loginProvider" | "store" | "member" | "product" | "category" | "productImage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -630,6 +631,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserVerificationCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserVerificationCountAggregateOutputType> | number
+        }
+      }
+    }
+    LoginProvider: {
+      payload: Prisma.$LoginProviderPayload<ExtArgs>
+      fields: Prisma.LoginProviderFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LoginProviderFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoginProviderPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LoginProviderFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoginProviderPayload>
+        }
+        findFirst: {
+          args: Prisma.LoginProviderFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoginProviderPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LoginProviderFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoginProviderPayload>
+        }
+        findMany: {
+          args: Prisma.LoginProviderFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoginProviderPayload>[]
+        }
+        create: {
+          args: Prisma.LoginProviderCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoginProviderPayload>
+        }
+        createMany: {
+          args: Prisma.LoginProviderCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LoginProviderCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoginProviderPayload>[]
+        }
+        delete: {
+          args: Prisma.LoginProviderDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoginProviderPayload>
+        }
+        update: {
+          args: Prisma.LoginProviderUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoginProviderPayload>
+        }
+        deleteMany: {
+          args: Prisma.LoginProviderDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LoginProviderUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LoginProviderUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoginProviderPayload>[]
+        }
+        upsert: {
+          args: Prisma.LoginProviderUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoginProviderPayload>
+        }
+        aggregate: {
+          args: Prisma.LoginProviderAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLoginProvider>
+        }
+        groupBy: {
+          args: Prisma.LoginProviderGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LoginProviderGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LoginProviderCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LoginProviderCountAggregateOutputType> | number
         }
       }
     }
@@ -1086,6 +1161,16 @@ export const UserVerificationScalarFieldEnum = {
 export type UserVerificationScalarFieldEnum = (typeof UserVerificationScalarFieldEnum)[keyof typeof UserVerificationScalarFieldEnum]
 
 
+export const LoginProviderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  provider: 'provider',
+  providerId: 'providerId'
+} as const
+
+export type LoginProviderScalarFieldEnum = (typeof LoginProviderScalarFieldEnum)[keyof typeof LoginProviderScalarFieldEnum]
+
+
 export const StoreScalarFieldEnum = {
   storeId: 'storeId',
   ownerId: 'ownerId',
@@ -1255,6 +1340,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Provider'
+ */
+export type EnumProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Provider'>
+    
+
+
+/**
+ * Reference to a field of type 'Provider[]'
+ */
+export type ListEnumProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Provider[]'>
     
 
 
@@ -1453,6 +1552,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   userSession?: Prisma.UserSessionOmit
   userVerification?: Prisma.UserVerificationOmit
+  loginProvider?: Prisma.LoginProviderOmit
   store?: Prisma.StoreOmit
   member?: Prisma.MemberOmit
   product?: Prisma.ProductOmit

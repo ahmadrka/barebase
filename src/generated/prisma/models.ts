@@ -11,6 +11,7 @@
 export type * from './models/User.js'
 export type * from './models/UserSession.js'
 export type * from './models/UserVerification.js'
+export type * from './models/LoginProvider.js'
 export type * from './models/Store.js'
 export type * from './models/Member.js'
 export type * from './models/Product.js'

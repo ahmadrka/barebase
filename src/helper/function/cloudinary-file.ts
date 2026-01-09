@@ -5,10 +5,12 @@ import * as dotenv from 'dotenv';
 import sharp from 'sharp';
 import { BadRequestException, HttpStatus } from '@nestjs/common';
 import { ErrorCode } from '../enum/error-code';
+import { v4 as uuidv4 } from 'uuid';
 dotenv.config();
 
 export enum FolderType {
   PRODUCTS = 'products',
+  AVATAR = 'avatar',
 }
 
 // Configuration
@@ -66,6 +68,19 @@ export async function uploadToCloudinary(
     } else {
       reject(new Error('Invalid file object: no buffer found'));
     }
+  });
+}
+
+export async function uploadToCloudinaryFromBase64(
+  base64String: string,
+  folder: FolderType,
+): Promise<UploadApiResponse> {
+  const folderPrefix = process.env.NODE_ENV === 'development' ? 'test' : 'prod';
+
+  return cloudinary.uploader.upload(base64String, {
+    public_id: uuidv4(),
+    folder: `barestore-${folderPrefix}/${folder}`,
+    resource_type: 'auto',
   });
 }
 

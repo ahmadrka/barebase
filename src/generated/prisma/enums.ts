@@ -28,6 +28,15 @@ export const UserRole = {
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 
+export const Provider = {
+  GOOGLE: 'GOOGLE',
+  FACEBOOK: 'FACEBOOK',
+  MICROSOFT: 'MICROSOFT'
+} as const
+
+export type Provider = (typeof Provider)[keyof typeof Provider]
+
+
 export const StoreStatus = {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE',

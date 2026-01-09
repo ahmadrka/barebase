@@ -276,6 +276,7 @@ export type UserWhereInput = {
   userVerification?: Prisma.UserVerificationListRelationFilter
   store?: Prisma.StoreListRelationFilter
   member?: Prisma.MemberListRelationFilter
+  providers?: Prisma.LoginProviderListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -295,6 +296,7 @@ export type UserOrderByWithRelationInput = {
   userVerification?: Prisma.UserVerificationOrderByRelationAggregateInput
   store?: Prisma.StoreOrderByRelationAggregateInput
   member?: Prisma.MemberOrderByRelationAggregateInput
+  providers?: Prisma.LoginProviderOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -317,6 +319,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   userVerification?: Prisma.UserVerificationListRelationFilter
   store?: Prisma.StoreListRelationFilter
   member?: Prisma.MemberListRelationFilter
+  providers?: Prisma.LoginProviderListRelationFilter
 }, "userId" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -373,6 +376,7 @@ export type UserCreateInput = {
   userVerification?: Prisma.UserVerificationCreateNestedManyWithoutUserInput
   store?: Prisma.StoreCreateNestedManyWithoutOwnerInput
   member?: Prisma.MemberCreateNestedManyWithoutUserInput
+  providers?: Prisma.LoginProviderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -392,6 +396,7 @@ export type UserUncheckedCreateInput = {
   userVerification?: Prisma.UserVerificationUncheckedCreateNestedManyWithoutUserInput
   store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerInput
   member?: Prisma.MemberUncheckedCreateNestedManyWithoutUserInput
+  providers?: Prisma.LoginProviderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -410,6 +415,7 @@ export type UserUpdateInput = {
   userVerification?: Prisma.UserVerificationUpdateManyWithoutUserNestedInput
   store?: Prisma.StoreUpdateManyWithoutOwnerNestedInput
   member?: Prisma.MemberUpdateManyWithoutUserNestedInput
+  providers?: Prisma.LoginProviderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -429,6 +435,7 @@ export type UserUncheckedUpdateInput = {
   userVerification?: Prisma.UserVerificationUncheckedUpdateManyWithoutUserNestedInput
   store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerNestedInput
   member?: Prisma.MemberUncheckedUpdateManyWithoutUserNestedInput
+  providers?: Prisma.LoginProviderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -593,6 +600,20 @@ export type UserUpdateOneRequiredWithoutUserVerificationNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserVerificationInput, Prisma.UserUpdateWithoutUserVerificationInput>, Prisma.UserUncheckedUpdateWithoutUserVerificationInput>
 }
 
+export type UserCreateNestedOneWithoutProvidersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProvidersInput, Prisma.UserUncheckedCreateWithoutProvidersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProvidersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutProvidersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProvidersInput, Prisma.UserUncheckedCreateWithoutProvidersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProvidersInput
+  upsert?: Prisma.UserUpsertWithoutProvidersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProvidersInput, Prisma.UserUpdateWithoutProvidersInput>, Prisma.UserUncheckedUpdateWithoutProvidersInput>
+}
+
 export type UserCreateNestedOneWithoutStoreInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutStoreInput, Prisma.UserUncheckedCreateWithoutStoreInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoreInput
@@ -636,6 +657,7 @@ export type UserCreateWithoutUserSessionsInput = {
   userVerification?: Prisma.UserVerificationCreateNestedManyWithoutUserInput
   store?: Prisma.StoreCreateNestedManyWithoutOwnerInput
   member?: Prisma.MemberCreateNestedManyWithoutUserInput
+  providers?: Prisma.LoginProviderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserSessionsInput = {
@@ -654,6 +676,7 @@ export type UserUncheckedCreateWithoutUserSessionsInput = {
   userVerification?: Prisma.UserVerificationUncheckedCreateNestedManyWithoutUserInput
   store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerInput
   member?: Prisma.MemberUncheckedCreateNestedManyWithoutUserInput
+  providers?: Prisma.LoginProviderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserSessionsInput = {
@@ -687,6 +710,7 @@ export type UserUpdateWithoutUserSessionsInput = {
   userVerification?: Prisma.UserVerificationUpdateManyWithoutUserNestedInput
   store?: Prisma.StoreUpdateManyWithoutOwnerNestedInput
   member?: Prisma.MemberUpdateManyWithoutUserNestedInput
+  providers?: Prisma.LoginProviderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserSessionsInput = {
@@ -705,6 +729,7 @@ export type UserUncheckedUpdateWithoutUserSessionsInput = {
   userVerification?: Prisma.UserVerificationUncheckedUpdateManyWithoutUserNestedInput
   store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerNestedInput
   member?: Prisma.MemberUncheckedUpdateManyWithoutUserNestedInput
+  providers?: Prisma.LoginProviderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserVerificationInput = {
@@ -722,6 +747,7 @@ export type UserCreateWithoutUserVerificationInput = {
   userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   store?: Prisma.StoreCreateNestedManyWithoutOwnerInput
   member?: Prisma.MemberCreateNestedManyWithoutUserInput
+  providers?: Prisma.LoginProviderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserVerificationInput = {
@@ -740,6 +766,7 @@ export type UserUncheckedCreateWithoutUserVerificationInput = {
   userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerInput
   member?: Prisma.MemberUncheckedCreateNestedManyWithoutUserInput
+  providers?: Prisma.LoginProviderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserVerificationInput = {
@@ -773,6 +800,7 @@ export type UserUpdateWithoutUserVerificationInput = {
   userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   store?: Prisma.StoreUpdateManyWithoutOwnerNestedInput
   member?: Prisma.MemberUpdateManyWithoutUserNestedInput
+  providers?: Prisma.LoginProviderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserVerificationInput = {
@@ -789,6 +817,97 @@ export type UserUncheckedUpdateWithoutUserVerificationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerNestedInput
+  member?: Prisma.MemberUncheckedUpdateManyWithoutUserNestedInput
+  providers?: Prisma.LoginProviderUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutProvidersInput = {
+  avatar?: string | null
+  name: string
+  email: string
+  telephone?: string | null
+  description?: string | null
+  passwordHash?: string | null
+  userStatus?: $Enums.UserStatus
+  userRole?: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  userVerification?: Prisma.UserVerificationCreateNestedManyWithoutUserInput
+  store?: Prisma.StoreCreateNestedManyWithoutOwnerInput
+  member?: Prisma.MemberCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutProvidersInput = {
+  userId?: number
+  avatar?: string | null
+  name: string
+  email: string
+  telephone?: string | null
+  description?: string | null
+  passwordHash?: string | null
+  userStatus?: $Enums.UserStatus
+  userRole?: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  userVerification?: Prisma.UserVerificationUncheckedCreateNestedManyWithoutUserInput
+  store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerInput
+  member?: Prisma.MemberUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutProvidersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutProvidersInput, Prisma.UserUncheckedCreateWithoutProvidersInput>
+}
+
+export type UserUpsertWithoutProvidersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProvidersInput, Prisma.UserUncheckedUpdateWithoutProvidersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProvidersInput, Prisma.UserUncheckedCreateWithoutProvidersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutProvidersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProvidersInput, Prisma.UserUncheckedUpdateWithoutProvidersInput>
+}
+
+export type UserUpdateWithoutProvidersInput = {
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userStatus?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  userRole?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  userVerification?: Prisma.UserVerificationUpdateManyWithoutUserNestedInput
+  store?: Prisma.StoreUpdateManyWithoutOwnerNestedInput
+  member?: Prisma.MemberUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutProvidersInput = {
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userStatus?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  userRole?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  userVerification?: Prisma.UserVerificationUncheckedUpdateManyWithoutUserNestedInput
   store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerNestedInput
   member?: Prisma.MemberUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -808,6 +927,7 @@ export type UserCreateWithoutStoreInput = {
   userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   userVerification?: Prisma.UserVerificationCreateNestedManyWithoutUserInput
   member?: Prisma.MemberCreateNestedManyWithoutUserInput
+  providers?: Prisma.LoginProviderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStoreInput = {
@@ -826,6 +946,7 @@ export type UserUncheckedCreateWithoutStoreInput = {
   userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   userVerification?: Prisma.UserVerificationUncheckedCreateNestedManyWithoutUserInput
   member?: Prisma.MemberUncheckedCreateNestedManyWithoutUserInput
+  providers?: Prisma.LoginProviderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStoreInput = {
@@ -859,6 +980,7 @@ export type UserUpdateWithoutStoreInput = {
   userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   userVerification?: Prisma.UserVerificationUpdateManyWithoutUserNestedInput
   member?: Prisma.MemberUpdateManyWithoutUserNestedInput
+  providers?: Prisma.LoginProviderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoreInput = {
@@ -877,6 +999,7 @@ export type UserUncheckedUpdateWithoutStoreInput = {
   userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   userVerification?: Prisma.UserVerificationUncheckedUpdateManyWithoutUserNestedInput
   member?: Prisma.MemberUncheckedUpdateManyWithoutUserNestedInput
+  providers?: Prisma.LoginProviderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMemberInput = {
@@ -894,6 +1017,7 @@ export type UserCreateWithoutMemberInput = {
   userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   userVerification?: Prisma.UserVerificationCreateNestedManyWithoutUserInput
   store?: Prisma.StoreCreateNestedManyWithoutOwnerInput
+  providers?: Prisma.LoginProviderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMemberInput = {
@@ -912,6 +1036,7 @@ export type UserUncheckedCreateWithoutMemberInput = {
   userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   userVerification?: Prisma.UserVerificationUncheckedCreateNestedManyWithoutUserInput
   store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerInput
+  providers?: Prisma.LoginProviderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMemberInput = {
@@ -945,6 +1070,7 @@ export type UserUpdateWithoutMemberInput = {
   userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   userVerification?: Prisma.UserVerificationUpdateManyWithoutUserNestedInput
   store?: Prisma.StoreUpdateManyWithoutOwnerNestedInput
+  providers?: Prisma.LoginProviderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemberInput = {
@@ -963,6 +1089,7 @@ export type UserUncheckedUpdateWithoutMemberInput = {
   userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   userVerification?: Prisma.UserVerificationUncheckedUpdateManyWithoutUserNestedInput
   store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerNestedInput
+  providers?: Prisma.LoginProviderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -975,6 +1102,7 @@ export type UserCountOutputType = {
   userVerification: number
   store: number
   member: number
+  providers: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -982,6 +1110,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   userVerification?: boolean | UserCountOutputTypeCountUserVerificationArgs
   store?: boolean | UserCountOutputTypeCountStoreArgs
   member?: boolean | UserCountOutputTypeCountMemberArgs
+  providers?: boolean | UserCountOutputTypeCountProvidersArgs
 }
 
 /**
@@ -1022,6 +1151,13 @@ export type UserCountOutputTypeCountMemberArgs<ExtArgs extends runtime.Types.Ext
   where?: Prisma.MemberWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountProvidersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LoginProviderWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   userId?: boolean
@@ -1040,6 +1176,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   userVerification?: boolean | Prisma.User$userVerificationArgs<ExtArgs>
   store?: boolean | Prisma.User$storeArgs<ExtArgs>
   member?: boolean | Prisma.User$memberArgs<ExtArgs>
+  providers?: boolean | Prisma.User$providersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1094,6 +1231,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   userVerification?: boolean | Prisma.User$userVerificationArgs<ExtArgs>
   store?: boolean | Prisma.User$storeArgs<ExtArgs>
   member?: boolean | Prisma.User$memberArgs<ExtArgs>
+  providers?: boolean | Prisma.User$providersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1106,6 +1244,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     userVerification: Prisma.$UserVerificationPayload<ExtArgs>[]
     store: Prisma.$StorePayload<ExtArgs>[]
     member: Prisma.$MemberPayload<ExtArgs>[]
+    providers: Prisma.$LoginProviderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     userId: number
@@ -1518,6 +1657,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   userVerification<T extends Prisma.User$userVerificationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userVerificationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserVerificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   store<T extends Prisma.User$storeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$storeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   member<T extends Prisma.User$memberArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$memberArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  providers<T extends Prisma.User$providersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$providersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LoginProviderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2040,6 +2180,30 @@ export type User$memberArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.MemberScalarFieldEnum | Prisma.MemberScalarFieldEnum[]
+}
+
+/**
+ * User.providers
+ */
+export type User$providersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LoginProvider
+   */
+  select?: Prisma.LoginProviderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LoginProvider
+   */
+  omit?: Prisma.LoginProviderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LoginProviderInclude<ExtArgs> | null
+  where?: Prisma.LoginProviderWhereInput
+  orderBy?: Prisma.LoginProviderOrderByWithRelationInput | Prisma.LoginProviderOrderByWithRelationInput[]
+  cursor?: Prisma.LoginProviderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LoginProviderScalarFieldEnum | Prisma.LoginProviderScalarFieldEnum[]
 }
 
 /**

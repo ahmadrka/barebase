@@ -134,4 +134,10 @@ export class MemberRepository {
       data: { status: accept ? 'ACTIVE' : 'INACTIVE' },
     });
   }
+
+  async getMemberCount(storeId: number) {
+    return await this.prisma.member.count({
+      where: { storeId },
+    });
+  }
 }

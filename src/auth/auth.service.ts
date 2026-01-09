@@ -25,6 +25,10 @@ import { FastifyRequest } from 'fastify';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma } from 'src/generated/prisma/browser';
 import { LogoutDto } from './dto/logout.dto';
+import {
+  FolderType,
+  uploadToCloudinaryFromBase64,
+} from 'src/helper/function/cloudinary-file';
 
 @Injectable()
 export class AuthService {
@@ -388,6 +392,88 @@ export class AuthService {
     return {
       success: true,
       message: 'Google login success',
+      token: generateToken,
+      data: existingUser,
+    };
+  }
+
+  async findOrCreateUserMicrosoft(
+    microsoftUser: any,
+    meta: FastifyRequest,
+  ): Promise<{
+    success: boolean;
+    message: string;
+    token: { accessToken: string; refreshToken: string };
+    data: any;
+  }> {
+    const avatar = uploadToCloudinaryFromBase64(
+      microsoftUser.picture,
+      FolderType.AVATAR,
+    );
+    const avatarUrl = avatar ? (await avatar).secure_url : undefined;
+
+    let existingUser = await this.userRepo.findByEmail(microsoftUser.email);
+
+    if (existingUser) {
+      existingUser = await this.userRepo.updateUser(
+        {
+          avatar: existingUser.avatar ? undefined : avatarUrl,
+        },
+        existingUser.userId,
+      );
+    } else {
+      existingUser = await this.userRepo.createUser({
+        email: microsoftUser.email,
+        name: `${microsoftUser.firstName} ${microsoftUser.lastName}`,
+        avatar: avatarUrl,
+        userStatus: 'ACTIVE',
+      });
+    }
+
+    const generateToken = await this.tokenSession(existingUser.email, meta);
+
+    return {
+      success: true,
+      message: 'Microsoft login success',
+      token: generateToken,
+      data: existingUser,
+    };
+  }
+
+  async findOrCreateUserFacebook(
+    facebookUser: any,
+    meta: FastifyRequest,
+  ): Promise<{
+    success: boolean;
+    message: string;
+    token: { accessToken: string; refreshToken: string };
+    data: any;
+  }> {
+    let existingUser = await this.userRepo.findByEmail(facebookUser.email);
+
+    if (existingUser) {
+      existingUser = await this.userRepo.updateUser(
+        {
+          avatar: existingUser.avatar
+            ? undefined
+            : facebookUser.photos?.[0]?.value,
+        },
+        existingUser.userId,
+      );
+    } else {
+      existingUser = await this.userRepo.createUser({
+        email: facebookUser.email,
+        name: `${facebookUser.firstName} ${facebookUser.middleName} ${facebookUser.lastName}`,
+        avatar: facebookUser.photos?.[0]?.value,
+        userStatus: 'ACTIVE',
+      });
+    }
+
+    const generateToken = await this.tokenSession(existingUser.email, meta);
+
+    return {
+      success: true,
+      message: 'Facebook login success',
       token: generateToken,
       data: existingUser,
     };

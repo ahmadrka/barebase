@@ -10,6 +10,8 @@ import { UserVerificationRepository } from 'src/users/repositories/user-verifica
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { JwtAuthStrategy } from './strategy/jwt-auth.strategy';
 import { GoogleStrategy } from './strategy/google.strategy';
+import { MicrosoftStrategy } from './strategy/microsoft.strategy';
+import { FacebookStrategy } from './strategy/facebook.strategy';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -32,6 +34,8 @@ const JWT_SECRET = process.env.JWT_SECRET;
     UserVerificationRepository,
     JwtAuthStrategy,
     GoogleStrategy,
+    MicrosoftStrategy,
+    FacebookStrategy,
   ],
 })
 export class AuthModule {}
