@@ -14,6 +14,7 @@ export class CreateProductDto {
   @IsDecimal()
   price: string;
 
+  @IsOptional()
   @IsString()
   description: string;
 

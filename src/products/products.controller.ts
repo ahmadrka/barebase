@@ -23,15 +23,16 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { QueryProductDto } from './dto/query-product.dto';
 import { GetUser } from 'src/helper/decorator/user.decorator';
-import { ErrorCode } from 'src/helper/enum/error-code';
 import { CustomFileValidator } from 'src/helper/validator/file-validator';
 import { UpdateProductImageDto } from './dto/update-product-image.dto';
+import { SkipThrottle, Throttle } from '@nestjs/throttler';
 
 @UseGuards(JwtAuthGuard)
 @Controller('stores/:storeId/products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
+  @SkipThrottle()
   @Get()
   findAll(
     @Query() query: QueryProductDto,
@@ -41,6 +42,7 @@ export class ProductsController {
     return this.productsService.findAll(+storeId, query, +userId);
   }
 
+  @SkipThrottle()
   @Get(':productId')
   findOne(
     @Param('productId') productId: string,

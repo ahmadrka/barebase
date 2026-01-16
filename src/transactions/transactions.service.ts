@@ -2,26 +2,45 @@ import { Injectable } from '@nestjs/common';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { QueryTransactionDto } from './dto/query-transaction.dto';
+import { TransactionsRepository } from './repositories/transactions.repository';
+import { CartItemsRepository } from './repositories/cart-items.repository';
 
 @Injectable()
 export class TransactionsService {
-  create(createTransactionDto: CreateTransactionDto) {
-    return 'This action adds a new transaction';
+  constructor(
+    private readonly transactionsRepository: TransactionsRepository,
+    private readonly cartItemsRepository: CartItemsRepository,
+  ) {}
+
+  findAll(query: QueryTransactionDto, storeId: number, userId: number) {
+    return this.transactionsRepository.findAll(query, storeId);
   }
 
-  findAll(query: QueryTransactionDto) {
-    return `This action returns all transactions`;
+  findOne(id: number, storeId: number, userId: number) {
+    return this.transactionsRepository.findOne(id, storeId);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} transaction`;
+  createTransaction(
+    createTransactionDto: CreateTransactionDto,
+    storeId: number,
+    userId: number,
+  ) {
+    return this.transactionsRepository.createTransaction(
+      createTransactionDto,
+      storeId,
+    );
   }
 
-  update(id: number, updateTransactionDto: UpdateTransactionDto) {
-    return `This action updates a #${id} transaction`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} transaction`;
+  updateTransaction(
+    id: number,
+    updateTransactionDto: UpdateTransactionDto,
+    storeId: number,
+    userId: number,
+  ) {
+    return this.transactionsRepository.updateTransaction(
+      id,
+      updateTransactionDto,
+      storeId,
+    );
   }
 }

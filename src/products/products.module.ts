@@ -7,6 +7,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { MemberRepository } from 'src/members/members.repository';
 import { ProductFallbackController } from './product-fallback.controller';
 import { ProductImageRepository } from './repositories/product-images.repository';
+import { CategoriesRepository } from 'src/categories/categories.repository';
 
 @Module({
   imports: [PrismaModule],
@@ -17,6 +18,7 @@ import { ProductImageRepository } from './repositories/product-images.repository
     ProductImageRepository,
     MemberRepository,
     PrismaService,
+    CategoriesRepository,
   ],
 })
 export class ProductsModule {}

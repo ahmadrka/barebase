@@ -62,3 +62,13 @@ export type Category = Prisma.CategoryModel
  * 
  */
 export type ProductImage = Prisma.ProductImageModel
+/**
+ * Model Transaction
+ * 
+ */
+export type Transaction = Prisma.TransactionModel
+/**
+ * Model CartItem
+ * 
+ */
+export type CartItem = Prisma.CartItemModel
