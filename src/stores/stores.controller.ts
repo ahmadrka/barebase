@@ -18,6 +18,7 @@ import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { GetUser } from 'src/helper/decorator/user.decorator';
 import { MemberGuard } from 'src/auth/guard/member.guard';
 import { InvitationDto } from './dto/invitation.dto';
+import { OperatingHourDto } from './dto/operating-hour.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('stores')
@@ -58,6 +59,24 @@ export class StoresController {
     @GetUser('userId') userId: string,
   ) {
     return this.storesService.deleteStore(+storeId, +userId);
+  }
+
+  // Store Operating Hour
+  @Patch(':storeId/operating-hour')
+  updateOperatingHour(
+    @Body() updateDto: OperatingHourDto,
+    @Param('storeId') storeId: string,
+    @GetUser('userId') userId: string,
+  ) {
+    return this.storesService.updateOperatingHour(updateDto, +storeId, +userId);
+  }
+
+  @Get(':storeId/operating-hour')
+  getOperatingHour(
+    @Param('storeId') storeId: string,
+    @GetUser('userId') userId: string,
+  ) {
+    return this.storesService.getOperatingHour(+storeId, +userId);
   }
 
   // Invitation endpoint

@@ -100,13 +100,15 @@ enum Provider {
 }
 
 model Store {
-  storeId     Int         @id @default(autoincrement()) @map("store_id")
-  ownerId     Int         @map("owner_id")
-  avatar      String?     @db.VarChar(255)
-  name        String      @db.VarChar(30)
-  description String?     @db.VarChar(255)
-  storeStatus StoreStatus @default(ACTIVE) @map("store_status")
-  inviteCode  String?     @map("inviteCode") @db.VarChar(255)
+  storeId      Int         @id @default(autoincrement()) @map("store_id")
+  ownerId      Int         @map("owner_id")
+  banner       String?     @db.VarChar(255)
+  avatar       String?     @db.VarChar(255)
+  name         String      @db.VarChar(30)
+  description  String?     @db.VarChar(255)
+  storeStatus  StoreStatus @default(ACTIVE) @map("store_status")
+  inviteCode   String?     @map("invite_code") @db.VarChar(255) @unique
+  operatingHour Json?       @map("operating_hour")
 
   createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
   updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamp(6)
@@ -115,6 +117,7 @@ model Store {
   products   Product[]
   categories Category[]
   member     Member[]
+  transactions Transaction[]
   owner      User       @relation(fields: [ownerId], references: [userId], onDelete: Cascade)
 
   @@map("stores")
@@ -138,6 +141,8 @@ model Member {
 
   user  User  @relation(fields: [userId], references: [userId], onDelete: Cascade)
   store Store @relation(fields: [storeId], references: [storeId], onDelete: Cascade)
+
+  transactions Transaction[]
 
   @@unique([userId, storeId])
   @@map("members")
@@ -179,6 +184,7 @@ model Product {
   deletedAt DateTime? @map("deleted_at") @db.Timestamp(6)
 
   images   ProductImage[]
+  items    CartItem[]
   store    Store          @relation(fields: [storeId], references: [storeId], onDelete: Cascade)
   category Category?      @relation(fields: [categoryId], references: [categoryId], onDelete: SetNull)
 
@@ -204,7 +210,7 @@ enum WeightType {
 
 model Category {
   categoryId Int    @id @default(autoincrement()) @map("category_id")
-  storeId    Int    @unique @map("store_id")
+  storeId    Int    @map("store_id")
   name       String @db.VarChar(30)
 
   products Product[]
@@ -225,4 +231,44 @@ model ProductImage {
   product Product? @relation(fields: [ownerId], references: [productId], onDelete: Cascade)
 
   @@map("product_images")
+}
+
+model Transaction {
+  id          Int               @id @default(autoincrement())
+  storeId     Int               @map("store_id")
+  memberId    Int               @map("member_id")
+  method      PaymentMethod     @default(CASH)
+  status      TransactionStatus @default(PENDING)
+  totalPrice  Decimal           @default(0) @db.Decimal(18, 2) @map("total_price")
+  createdAt   DateTime          @default(now()) @map("created_at")
+  
+  items       CartItem[]
+  store       Store             @relation(fields: [storeId], references: [storeId], onDelete: Cascade)
+  member      Member            @relation(fields: [memberId], references: [memberId], onDelete: Cascade)
+}
+
+enum PaymentMethod {
+  CASH
+  DEBIT
+  CREDIT
+  QRIS
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+  REFUNDED
+  FAILED
+}
+
+model CartItem {
+  id            Int         @id @default(autoincrement())
+  transactionId Int         @map("transaction_id")
+  productId     Int         @map("product_id")
+  amount        Int         @default(1)
+  price         Decimal     @default(0) @db.Decimal(18, 2)
+  
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+  product       Product     @relation(fields: [productId], references: [productId], onDelete: Cascade)
 }

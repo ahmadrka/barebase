@@ -17,6 +17,8 @@ import { UserRepository } from 'src/users/repositories/users.repository';
 import { MemberRole } from 'src/generated/prisma/enums';
 import { sendInvitationEmail } from 'src/helper/function/resend-email';
 import { ProductRepository } from 'src/products/repositories/products.repository';
+import { OperatingHourDto } from './dto/operating-hour.dto';
+import { CategoriesRepository } from 'src/categories/categories.repository';
 
 @Injectable()
 export class StoresService {
@@ -25,6 +27,7 @@ export class StoresService {
     private readonly storeRepo: StoreRepository,
     private readonly memberRepo: MemberRepository,
     private readonly productRepo: ProductRepository,
+    private readonly categoriesRepo: CategoriesRepository,
   ) {}
 
   findAll(query: QueryStoreDto, userId: number) {
@@ -102,6 +105,65 @@ export class StoresService {
     }
     await this.storeRepo.deleteStore(storeId);
     return { success: true, message: 'Store deleted successfully' };
+  }
+
+  // Store Operating Hour
+  async updateOperatingHour(
+    updateDto: OperatingHourDto,
+    storeId: number,
+    userId: number,
+  ) {
+    const store = await this.storeRepo.findOne(storeId);
+    if (!store) {
+      throw new NotFoundException({
+        message: 'Store not found',
+        errorCode: ErrorCode.STORE_NOT_FOUND,
+        statusCode: HttpStatus.NOT_FOUND,
+      });
+    }
+    const member = await this.memberRepo.findOne(storeId, userId);
+    if (!member) {
+      throw new NotFoundException({
+        message: 'Member not found',
+        errorCode: ErrorCode.MEMBER_NOT_FOUND,
+        statusCode: HttpStatus.NOT_FOUND,
+      });
+    }
+    if (member.role !== 'OWNER' && member.role !== 'MANAGER') {
+      throw new ForbiddenException({
+        message: 'You are not authorized to update this store',
+        errorCode: ErrorCode.INSUFFICIENT_PERMISSIONS,
+        statusCode: HttpStatus.FORBIDDEN,
+      });
+    }
+    return this.storeRepo.updateOperatingHour(updateDto, storeId);
+  }
+
+  async getOperatingHour(storeId: number, userId: number) {
+    const store = await this.storeRepo.findOne(storeId);
+    if (!store) {
+      throw new NotFoundException({
+        message: 'Store not found',
+        errorCode: ErrorCode.STORE_NOT_FOUND,
+        statusCode: HttpStatus.NOT_FOUND,
+      });
+    }
+    const member = await this.memberRepo.findOne(storeId, userId);
+    if (!member) {
+      throw new NotFoundException({
+        message: 'Member not found',
+        errorCode: ErrorCode.MEMBER_NOT_FOUND,
+        statusCode: HttpStatus.NOT_FOUND,
+      });
+    }
+    if (member.role !== 'OWNER' && member.role !== 'MANAGER') {
+      throw new ForbiddenException({
+        message: 'You are not authorized to get this store',
+        errorCode: ErrorCode.INSUFFICIENT_PERMISSIONS,
+        statusCode: HttpStatus.FORBIDDEN,
+      });
+    }
+    return this.storeRepo.getOperatingHour(storeId);
   }
 
   // Invitation logic
@@ -292,8 +354,18 @@ export class StoresService {
     }
 
     const memberCount = await this.memberRepo.getMemberCount(storeId);
+    const categoriesCount = await this.categoriesRepo.getCategoryCount(storeId);
     const productsCount = await this.productRepo.getProductCount(storeId);
+    const readyStock = await this.productRepo.getReadyStock(storeId);
+    const outofStock = await this.productRepo.getOutofStock(storeId);
 
-    return { storeId: store.storeId, memberCount, productsCount };
+    return {
+      storeId: store.storeId,
+      memberCount,
+      categoriesCount,
+      productsCount,
+      readyStock,
+      outofStock,
+    };
   }
 }

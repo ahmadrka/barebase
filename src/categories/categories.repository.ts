@@ -74,4 +74,12 @@ export class CategoriesRepository {
       select: {},
     });
   }
+
+  getCategoryCount(storeId: number) {
+    return this.prisma.category.count({
+      where: {
+        storeId,
+      },
+    });
+  }
 }

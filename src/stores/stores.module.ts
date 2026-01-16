@@ -7,6 +7,7 @@ import { StoreRepository } from './stores.repository';
 import { MemberRepository } from 'src/members/members.repository';
 import { UserRepository } from 'src/users/repositories/users.repository';
 import { ProductRepository } from 'src/products/repositories/products.repository';
+import { CategoriesRepository } from 'src/categories/categories.repository';
 
 @Module({
   imports: [PrismaModule],
@@ -18,6 +19,7 @@ import { ProductRepository } from 'src/products/repositories/products.repository
     MemberRepository,
     PrismaService,
     ProductRepository,
+    CategoriesRepository,
   ],
 })
 export class StoresModule {}

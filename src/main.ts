@@ -7,7 +7,6 @@ import {
 } from '@nestjs/platform-fastify';
 import helmet from '@fastify/helmet';
 import cors from '@fastify/cors';
-import rateLimit from '@fastify/rate-limit';
 import multipart from '@fastify/multipart';
 import pc from 'picocolors';
 import fastifyCookie from '@fastify/cookie';
@@ -65,12 +64,8 @@ async function bootstrap() {
       'http://localhost:3000',
       'http://localhost:3001',
     ],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
-  });
-
-  await app.register(rateLimit, {
-    max: 100,
-    timeWindow: '1 minute',
   });
 
   await app.register(multipart);

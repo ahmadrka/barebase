@@ -19,6 +19,7 @@ import {
 import { MemoryStorageFile } from 'nest-file-fastify';
 import { ProductImageRepository } from './repositories/product-images.repository';
 import { UpdateProductImageDto } from './dto/update-product-image.dto';
+import { CategoriesRepository } from 'src/categories/categories.repository';
 
 @Injectable()
 export class ProductsService {
@@ -26,6 +27,7 @@ export class ProductsService {
     private readonly productRepo: ProductRepository,
     private readonly memberRepo: MemberRepository,
     private readonly productImageRepo: ProductImageRepository,
+    private readonly categoryRepo: CategoriesRepository,
   ) {}
 
   async findAll(storeId: number, query: QueryProductDto, userId: number) {
@@ -93,9 +95,21 @@ export class ProductsService {
     const product = await this.productRepo.findLastOne(storeId);
     if (product && product.sku) {
       const lastNumber = parseInt(product.sku, 10);
-      finalPlu = (lastNumber + 1).toString().padStart(2, '0');
+      finalPlu = (lastNumber + 1).toString(); //.padStart(2, '0');
     } else {
-      finalPlu = '01';
+      finalPlu = '1';
+    }
+
+    const category = await this.categoryRepo.findOne(
+      createDto.categoryId,
+      storeId,
+    );
+    if (!category) {
+      throw new NotFoundException({
+        message: 'Category not found',
+        errorCode: ErrorCode.CATEGORY_NOT_FOUND,
+        statusCode: HttpStatus.NOT_FOUND,
+      });
     }
 
     return this.productRepo.createProduct(createDto, finalPlu, storeId);

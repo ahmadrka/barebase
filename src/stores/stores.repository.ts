@@ -3,6 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { QueryStoreDto } from './dto/query-store.dto';
 import { CreateStoreDto } from './dto/create-store.dto';
 import { UpdateStoreDto } from './dto/update-store.dto';
+import { OperatingHourDto } from './dto/operating-hour.dto';
 
 export const storeSelections = {
   storeId: true,
@@ -15,6 +16,7 @@ export const storeSelections = {
   createdAt: true,
   updatedAt: true,
   deletedAt: false,
+  operatingHour: true,
 };
 
 @Injectable()
@@ -52,6 +54,24 @@ export class StoreRepository {
     return await this.prisma.store.update({
       where: { storeId },
       data: { deletedAt: new Date() },
+    });
+  }
+
+  // Operating hour repo
+  async updateOperatingHour(updateDto: OperatingHourDto, storeId: number) {
+    return await this.prisma.store.update({
+      where: { storeId },
+      data: {
+        operatingHour: updateDto as any,
+      },
+      select: { ...storeSelections },
+    });
+  }
+
+  async getOperatingHour(storeId: number) {
+    return await this.prisma.store.findUnique({
+      where: { storeId },
+      select: { operatingHour: true },
     });
   }
 

@@ -39,6 +39,7 @@ export type StoreSumAggregateOutputType = {
 export type StoreMinAggregateOutputType = {
   storeId: number | null
   ownerId: number | null
+  banner: string | null
   avatar: string | null
   name: string | null
   description: string | null
@@ -52,6 +53,7 @@ export type StoreMinAggregateOutputType = {
 export type StoreMaxAggregateOutputType = {
   storeId: number | null
   ownerId: number | null
+  banner: string | null
   avatar: string | null
   name: string | null
   description: string | null
@@ -65,11 +67,13 @@ export type StoreMaxAggregateOutputType = {
 export type StoreCountAggregateOutputType = {
   storeId: number
   ownerId: number
+  banner: number
   avatar: number
   name: number
   description: number
   storeStatus: number
   inviteCode: number
+  operatingHour: number
   createdAt: number
   updatedAt: number
   deletedAt: number
@@ -90,6 +94,7 @@ export type StoreSumAggregateInputType = {
 export type StoreMinAggregateInputType = {
   storeId?: true
   ownerId?: true
+  banner?: true
   avatar?: true
   name?: true
   description?: true
@@ -103,6 +108,7 @@ export type StoreMinAggregateInputType = {
 export type StoreMaxAggregateInputType = {
   storeId?: true
   ownerId?: true
+  banner?: true
   avatar?: true
   name?: true
   description?: true
@@ -116,11 +122,13 @@ export type StoreMaxAggregateInputType = {
 export type StoreCountAggregateInputType = {
   storeId?: true
   ownerId?: true
+  banner?: true
   avatar?: true
   name?: true
   description?: true
   storeStatus?: true
   inviteCode?: true
+  operatingHour?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -216,11 +224,13 @@ export type StoreGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type StoreGroupByOutputType = {
   storeId: number
   ownerId: number
+  banner: string | null
   avatar: string | null
   name: string
   description: string | null
   storeStatus: $Enums.StoreStatus
   inviteCode: string | null
+  operatingHour: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
@@ -252,65 +262,76 @@ export type StoreWhereInput = {
   NOT?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
   storeId?: Prisma.IntFilter<"Store"> | number
   ownerId?: Prisma.IntFilter<"Store"> | number
+  banner?: Prisma.StringNullableFilter<"Store"> | string | null
   avatar?: Prisma.StringNullableFilter<"Store"> | string | null
   name?: Prisma.StringFilter<"Store"> | string
   description?: Prisma.StringNullableFilter<"Store"> | string | null
   storeStatus?: Prisma.EnumStoreStatusFilter<"Store"> | $Enums.StoreStatus
   inviteCode?: Prisma.StringNullableFilter<"Store"> | string | null
+  operatingHour?: Prisma.JsonNullableFilter<"Store">
   createdAt?: Prisma.DateTimeFilter<"Store"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Store"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Store"> | Date | string | null
   products?: Prisma.ProductListRelationFilter
   categories?: Prisma.CategoryListRelationFilter
   member?: Prisma.MemberListRelationFilter
+  transactions?: Prisma.TransactionListRelationFilter
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type StoreOrderByWithRelationInput = {
   storeId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  banner?: Prisma.SortOrderInput | Prisma.SortOrder
   avatar?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   storeStatus?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  operatingHour?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   products?: Prisma.ProductOrderByRelationAggregateInput
   categories?: Prisma.CategoryOrderByRelationAggregateInput
   member?: Prisma.MemberOrderByRelationAggregateInput
+  transactions?: Prisma.TransactionOrderByRelationAggregateInput
   owner?: Prisma.UserOrderByWithRelationInput
 }
 
 export type StoreWhereUniqueInput = Prisma.AtLeast<{
   storeId?: number
+  inviteCode?: string
   AND?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
   OR?: Prisma.StoreWhereInput[]
   NOT?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
   ownerId?: Prisma.IntFilter<"Store"> | number
+  banner?: Prisma.StringNullableFilter<"Store"> | string | null
   avatar?: Prisma.StringNullableFilter<"Store"> | string | null
   name?: Prisma.StringFilter<"Store"> | string
   description?: Prisma.StringNullableFilter<"Store"> | string | null
   storeStatus?: Prisma.EnumStoreStatusFilter<"Store"> | $Enums.StoreStatus
-  inviteCode?: Prisma.StringNullableFilter<"Store"> | string | null
+  operatingHour?: Prisma.JsonNullableFilter<"Store">
   createdAt?: Prisma.DateTimeFilter<"Store"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Store"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Store"> | Date | string | null
   products?: Prisma.ProductListRelationFilter
   categories?: Prisma.CategoryListRelationFilter
   member?: Prisma.MemberListRelationFilter
+  transactions?: Prisma.TransactionListRelationFilter
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "storeId">
+}, "storeId" | "inviteCode">
 
 export type StoreOrderByWithAggregationInput = {
   storeId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  banner?: Prisma.SortOrderInput | Prisma.SortOrder
   avatar?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   storeStatus?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  operatingHour?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -327,97 +348,115 @@ export type StoreScalarWhereWithAggregatesInput = {
   NOT?: Prisma.StoreScalarWhereWithAggregatesInput | Prisma.StoreScalarWhereWithAggregatesInput[]
   storeId?: Prisma.IntWithAggregatesFilter<"Store"> | number
   ownerId?: Prisma.IntWithAggregatesFilter<"Store"> | number
+  banner?: Prisma.StringNullableWithAggregatesFilter<"Store"> | string | null
   avatar?: Prisma.StringNullableWithAggregatesFilter<"Store"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"Store"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Store"> | string | null
   storeStatus?: Prisma.EnumStoreStatusWithAggregatesFilter<"Store"> | $Enums.StoreStatus
   inviteCode?: Prisma.StringNullableWithAggregatesFilter<"Store"> | string | null
+  operatingHour?: Prisma.JsonNullableWithAggregatesFilter<"Store">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Store"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Store"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Store"> | Date | string | null
 }
 
 export type StoreCreateInput = {
+  banner?: string | null
   avatar?: string | null
   name: string
   description?: string | null
   storeStatus?: $Enums.StoreStatus
   inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   products?: Prisma.ProductCreateNestedManyWithoutStoreInput
   categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
   member?: Prisma.MemberCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
   owner: Prisma.UserCreateNestedOneWithoutStoreInput
 }
 
 export type StoreUncheckedCreateInput = {
   storeId?: number
   ownerId: number
+  banner?: string | null
   avatar?: string | null
   name: string
   description?: string | null
   storeStatus?: $Enums.StoreStatus
   inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
   member?: Prisma.MemberUncheckedCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
 }
 
 export type StoreUpdateInput = {
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
   categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
   member?: Prisma.MemberUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutStoreNestedInput
 }
 
 export type StoreUncheckedUpdateInput = {
   storeId?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.IntFieldUpdateOperationsInput | number
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutStoreNestedInput
   member?: Prisma.MemberUncheckedUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
 }
 
 export type StoreCreateManyInput = {
   storeId?: number
   ownerId: number
+  banner?: string | null
   avatar?: string | null
   name: string
   description?: string | null
   storeStatus?: $Enums.StoreStatus
   inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
 }
 
 export type StoreUpdateManyMutationInput = {
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -426,11 +465,13 @@ export type StoreUpdateManyMutationInput = {
 export type StoreUncheckedUpdateManyInput = {
   storeId?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.IntFieldUpdateOperationsInput | number
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -449,11 +490,13 @@ export type StoreOrderByRelationAggregateInput = {
 export type StoreCountOrderByAggregateInput = {
   storeId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  banner?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   storeStatus?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrder
+  operatingHour?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -467,6 +510,7 @@ export type StoreAvgOrderByAggregateInput = {
 export type StoreMaxOrderByAggregateInput = {
   storeId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  banner?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -480,6 +524,7 @@ export type StoreMaxOrderByAggregateInput = {
 export type StoreMinOrderByAggregateInput = {
   storeId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  banner?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -588,33 +633,53 @@ export type StoreUpdateOneRequiredWithoutCategoriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutCategoriesInput, Prisma.StoreUpdateWithoutCategoriesInput>, Prisma.StoreUncheckedUpdateWithoutCategoriesInput>
 }
 
+export type StoreCreateNestedOneWithoutTransactionsInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutTransactionsInput, Prisma.StoreUncheckedCreateWithoutTransactionsInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutTransactionsInput
+  connect?: Prisma.StoreWhereUniqueInput
+}
+
+export type StoreUpdateOneRequiredWithoutTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutTransactionsInput, Prisma.StoreUncheckedCreateWithoutTransactionsInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutTransactionsInput
+  upsert?: Prisma.StoreUpsertWithoutTransactionsInput
+  connect?: Prisma.StoreWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutTransactionsInput, Prisma.StoreUpdateWithoutTransactionsInput>, Prisma.StoreUncheckedUpdateWithoutTransactionsInput>
+}
+
 export type StoreCreateWithoutOwnerInput = {
+  banner?: string | null
   avatar?: string | null
   name: string
   description?: string | null
   storeStatus?: $Enums.StoreStatus
   inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   products?: Prisma.ProductCreateNestedManyWithoutStoreInput
   categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
   member?: Prisma.MemberCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
 }
 
 export type StoreUncheckedCreateWithoutOwnerInput = {
   storeId?: number
+  banner?: string | null
   avatar?: string | null
   name: string
   description?: string | null
   storeStatus?: $Enums.StoreStatus
   inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
   member?: Prisma.MemberUncheckedCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
 }
 
 export type StoreCreateOrConnectWithoutOwnerInput = {
@@ -649,43 +714,51 @@ export type StoreScalarWhereInput = {
   NOT?: Prisma.StoreScalarWhereInput | Prisma.StoreScalarWhereInput[]
   storeId?: Prisma.IntFilter<"Store"> | number
   ownerId?: Prisma.IntFilter<"Store"> | number
+  banner?: Prisma.StringNullableFilter<"Store"> | string | null
   avatar?: Prisma.StringNullableFilter<"Store"> | string | null
   name?: Prisma.StringFilter<"Store"> | string
   description?: Prisma.StringNullableFilter<"Store"> | string | null
   storeStatus?: Prisma.EnumStoreStatusFilter<"Store"> | $Enums.StoreStatus
   inviteCode?: Prisma.StringNullableFilter<"Store"> | string | null
+  operatingHour?: Prisma.JsonNullableFilter<"Store">
   createdAt?: Prisma.DateTimeFilter<"Store"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Store"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Store"> | Date | string | null
 }
 
 export type StoreCreateWithoutMemberInput = {
+  banner?: string | null
   avatar?: string | null
   name: string
   description?: string | null
   storeStatus?: $Enums.StoreStatus
   inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   products?: Prisma.ProductCreateNestedManyWithoutStoreInput
   categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
   owner: Prisma.UserCreateNestedOneWithoutStoreInput
 }
 
 export type StoreUncheckedCreateWithoutMemberInput = {
   storeId?: number
   ownerId: number
+  banner?: string | null
   avatar?: string | null
   name: string
   description?: string | null
   storeStatus?: $Enums.StoreStatus
   inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
 }
 
 export type StoreCreateOrConnectWithoutMemberInput = {
@@ -705,61 +778,73 @@ export type StoreUpdateToOneWithWhereWithoutMemberInput = {
 }
 
 export type StoreUpdateWithoutMemberInput = {
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
   categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutStoreNestedInput
 }
 
 export type StoreUncheckedUpdateWithoutMemberInput = {
   storeId?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.IntFieldUpdateOperationsInput | number
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
 }
 
 export type StoreCreateWithoutProductsInput = {
+  banner?: string | null
   avatar?: string | null
   name: string
   description?: string | null
   storeStatus?: $Enums.StoreStatus
   inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
   member?: Prisma.MemberCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
   owner: Prisma.UserCreateNestedOneWithoutStoreInput
 }
 
 export type StoreUncheckedCreateWithoutProductsInput = {
   storeId?: number
   ownerId: number
+  banner?: string | null
   avatar?: string | null
   name: string
   description?: string | null
   storeStatus?: $Enums.StoreStatus
   inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
   member?: Prisma.MemberUncheckedCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
 }
 
 export type StoreCreateOrConnectWithoutProductsInput = {
@@ -779,61 +864,73 @@ export type StoreUpdateToOneWithWhereWithoutProductsInput = {
 }
 
 export type StoreUpdateWithoutProductsInput = {
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
   member?: Prisma.MemberUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutStoreNestedInput
 }
 
 export type StoreUncheckedUpdateWithoutProductsInput = {
   storeId?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.IntFieldUpdateOperationsInput | number
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutStoreNestedInput
   member?: Prisma.MemberUncheckedUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
 }
 
 export type StoreCreateWithoutCategoriesInput = {
+  banner?: string | null
   avatar?: string | null
   name: string
   description?: string | null
   storeStatus?: $Enums.StoreStatus
   inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   products?: Prisma.ProductCreateNestedManyWithoutStoreInput
   member?: Prisma.MemberCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
   owner: Prisma.UserCreateNestedOneWithoutStoreInput
 }
 
 export type StoreUncheckedCreateWithoutCategoriesInput = {
   storeId?: number
   ownerId: number
+  banner?: string | null
   avatar?: string | null
   name: string
   description?: string | null
   storeStatus?: $Enums.StoreStatus
   inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
   member?: Prisma.MemberUncheckedCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
 }
 
 export type StoreCreateOrConnectWithoutCategoriesInput = {
@@ -853,67 +950,118 @@ export type StoreUpdateToOneWithWhereWithoutCategoriesInput = {
 }
 
 export type StoreUpdateWithoutCategoriesInput = {
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
   member?: Prisma.MemberUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutStoreNestedInput
 }
 
 export type StoreUncheckedUpdateWithoutCategoriesInput = {
   storeId?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.IntFieldUpdateOperationsInput | number
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
   member?: Prisma.MemberUncheckedUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
 }
 
-export type StoreCreateManyOwnerInput = {
-  storeId?: number
+export type StoreCreateWithoutTransactionsInput = {
+  banner?: string | null
   avatar?: string | null
   name: string
   description?: string | null
   storeStatus?: $Enums.StoreStatus
   inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  products?: Prisma.ProductCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
+  member?: Prisma.MemberCreateNestedManyWithoutStoreInput
+  owner: Prisma.UserCreateNestedOneWithoutStoreInput
 }
 
-export type StoreUpdateWithoutOwnerInput = {
+export type StoreUncheckedCreateWithoutTransactionsInput = {
+  storeId?: number
+  ownerId: number
+  banner?: string | null
+  avatar?: string | null
+  name: string
+  description?: string | null
+  storeStatus?: $Enums.StoreStatus
+  inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
+  member?: Prisma.MemberUncheckedCreateNestedManyWithoutStoreInput
+}
+
+export type StoreCreateOrConnectWithoutTransactionsInput = {
+  where: Prisma.StoreWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoreCreateWithoutTransactionsInput, Prisma.StoreUncheckedCreateWithoutTransactionsInput>
+}
+
+export type StoreUpsertWithoutTransactionsInput = {
+  update: Prisma.XOR<Prisma.StoreUpdateWithoutTransactionsInput, Prisma.StoreUncheckedUpdateWithoutTransactionsInput>
+  create: Prisma.XOR<Prisma.StoreCreateWithoutTransactionsInput, Prisma.StoreUncheckedCreateWithoutTransactionsInput>
+  where?: Prisma.StoreWhereInput
+}
+
+export type StoreUpdateToOneWithWhereWithoutTransactionsInput = {
+  where?: Prisma.StoreWhereInput
+  data: Prisma.XOR<Prisma.StoreUpdateWithoutTransactionsInput, Prisma.StoreUncheckedUpdateWithoutTransactionsInput>
+}
+
+export type StoreUpdateWithoutTransactionsInput = {
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
   categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
   member?: Prisma.MemberUpdateManyWithoutStoreNestedInput
+  owner?: Prisma.UserUpdateOneRequiredWithoutStoreNestedInput
 }
 
-export type StoreUncheckedUpdateWithoutOwnerInput = {
+export type StoreUncheckedUpdateWithoutTransactionsInput = {
   storeId?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerId?: Prisma.IntFieldUpdateOperationsInput | number
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -922,13 +1070,64 @@ export type StoreUncheckedUpdateWithoutOwnerInput = {
   member?: Prisma.MemberUncheckedUpdateManyWithoutStoreNestedInput
 }
 
-export type StoreUncheckedUpdateManyWithoutOwnerInput = {
-  storeId?: Prisma.IntFieldUpdateOperationsInput | number
+export type StoreCreateManyOwnerInput = {
+  storeId?: number
+  banner?: string | null
+  avatar?: string | null
+  name: string
+  description?: string | null
+  storeStatus?: $Enums.StoreStatus
+  inviteCode?: string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+}
+
+export type StoreUpdateWithoutOwnerInput = {
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
+  member?: Prisma.MemberUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
+}
+
+export type StoreUncheckedUpdateWithoutOwnerInput = {
+  storeId?: Prisma.IntFieldUpdateOperationsInput | number
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
+  inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutStoreNestedInput
+  member?: Prisma.MemberUncheckedUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
+}
+
+export type StoreUncheckedUpdateManyWithoutOwnerInput = {
+  storeId?: Prisma.IntFieldUpdateOperationsInput | number
+  banner?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storeStatus?: Prisma.EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
+  inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operatingHour?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -943,12 +1142,14 @@ export type StoreCountOutputType = {
   products: number
   categories: number
   member: number
+  transactions: number
 }
 
 export type StoreCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   products?: boolean | StoreCountOutputTypeCountProductsArgs
   categories?: boolean | StoreCountOutputTypeCountCategoriesArgs
   member?: boolean | StoreCountOutputTypeCountMemberArgs
+  transactions?: boolean | StoreCountOutputTypeCountTransactionsArgs
 }
 
 /**
@@ -982,21 +1183,31 @@ export type StoreCountOutputTypeCountMemberArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.MemberWhereInput
 }
 
+/**
+ * StoreCountOutputType without action
+ */
+export type StoreCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TransactionWhereInput
+}
+
 
 export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   storeId?: boolean
   ownerId?: boolean
+  banner?: boolean
   avatar?: boolean
   name?: boolean
   description?: boolean
   storeStatus?: boolean
   inviteCode?: boolean
+  operatingHour?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
   products?: boolean | Prisma.Store$productsArgs<ExtArgs>
   categories?: boolean | Prisma.Store$categoriesArgs<ExtArgs>
   member?: boolean | Prisma.Store$memberArgs<ExtArgs>
+  transactions?: boolean | Prisma.Store$transactionsArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
@@ -1004,11 +1215,13 @@ export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type StoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   storeId?: boolean
   ownerId?: boolean
+  banner?: boolean
   avatar?: boolean
   name?: boolean
   description?: boolean
   storeStatus?: boolean
   inviteCode?: boolean
+  operatingHour?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -1018,11 +1231,13 @@ export type StoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   storeId?: boolean
   ownerId?: boolean
+  banner?: boolean
   avatar?: boolean
   name?: boolean
   description?: boolean
   storeStatus?: boolean
   inviteCode?: boolean
+  operatingHour?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -1032,21 +1247,24 @@ export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type StoreSelectScalar = {
   storeId?: boolean
   ownerId?: boolean
+  banner?: boolean
   avatar?: boolean
   name?: boolean
   description?: boolean
   storeStatus?: boolean
   inviteCode?: boolean
+  operatingHour?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
 }
 
-export type StoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"storeId" | "ownerId" | "avatar" | "name" | "description" | "storeStatus" | "inviteCode" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["store"]>
+export type StoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"storeId" | "ownerId" | "banner" | "avatar" | "name" | "description" | "storeStatus" | "inviteCode" | "operatingHour" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["store"]>
 export type StoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   products?: boolean | Prisma.Store$productsArgs<ExtArgs>
   categories?: boolean | Prisma.Store$categoriesArgs<ExtArgs>
   member?: boolean | Prisma.Store$memberArgs<ExtArgs>
+  transactions?: boolean | Prisma.Store$transactionsArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1063,16 +1281,19 @@ export type $StorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     products: Prisma.$ProductPayload<ExtArgs>[]
     categories: Prisma.$CategoryPayload<ExtArgs>[]
     member: Prisma.$MemberPayload<ExtArgs>[]
+    transactions: Prisma.$TransactionPayload<ExtArgs>[]
     owner: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     storeId: number
     ownerId: number
+    banner: string | null
     avatar: string | null
     name: string
     description: string | null
     storeStatus: $Enums.StoreStatus
     inviteCode: string | null
+    operatingHour: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
@@ -1473,6 +1694,7 @@ export interface Prisma__StoreClient<T, Null = never, ExtArgs extends runtime.Ty
   products<T extends Prisma.Store$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   categories<T extends Prisma.Store$categoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   member<T extends Prisma.Store$memberArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$memberArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  transactions<T extends Prisma.Store$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1505,11 +1727,13 @@ export interface Prisma__StoreClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface StoreFieldRefs {
   readonly storeId: Prisma.FieldRef<"Store", 'Int'>
   readonly ownerId: Prisma.FieldRef<"Store", 'Int'>
+  readonly banner: Prisma.FieldRef<"Store", 'String'>
   readonly avatar: Prisma.FieldRef<"Store", 'String'>
   readonly name: Prisma.FieldRef<"Store", 'String'>
   readonly description: Prisma.FieldRef<"Store", 'String'>
   readonly storeStatus: Prisma.FieldRef<"Store", 'StoreStatus'>
   readonly inviteCode: Prisma.FieldRef<"Store", 'String'>
+  readonly operatingHour: Prisma.FieldRef<"Store", 'Json'>
   readonly createdAt: Prisma.FieldRef<"Store", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Store", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Store", 'DateTime'>
@@ -1978,6 +2202,30 @@ export type Store$memberArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.MemberScalarFieldEnum | Prisma.MemberScalarFieldEnum[]
+}
+
+/**
+ * Store.transactions
+ */
+export type Store$transactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Transaction
+   */
+  select?: Prisma.TransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Transaction
+   */
+  omit?: Prisma.TransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null
+  where?: Prisma.TransactionWhereInput
+  orderBy?: Prisma.TransactionOrderByWithRelationInput | Prisma.TransactionOrderByWithRelationInput[]
+  cursor?: Prisma.TransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
 }
 
 /**

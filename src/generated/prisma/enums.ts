@@ -84,3 +84,24 @@ export const WeightType = {
 } as const
 
 export type WeightType = (typeof WeightType)[keyof typeof WeightType]
+
+
+export const PaymentMethod = {
+  CASH: 'CASH',
+  DEBIT: 'DEBIT',
+  CREDIT: 'CREDIT',
+  QRIS: 'QRIS'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const TransactionStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  REFUNDED: 'REFUNDED',
+  FAILED: 'FAILED'
+} as const
+
+export type TransactionStatus = (typeof TransactionStatus)[keyof typeof TransactionStatus]

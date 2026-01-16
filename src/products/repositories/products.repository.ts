@@ -20,6 +20,14 @@ const productSelections = {
   createdAt: true,
   updatedAt: true,
   deletedAt: false,
+  images: {
+    select: {
+      imageId: true,
+      url: true,
+      thumbnail: true,
+      order: true,
+    },
+  },
 };
 
 @Injectable()
@@ -123,6 +131,18 @@ export class ProductRepository {
         deletedAt: null,
         storeId,
       },
+    });
+  }
+
+  async getReadyStock(storeId: number) {
+    return await this.prisma.product.count({
+      where: { storeId, stock: { gt: 0 }, status: 'AVAILABLE' },
+    });
+  }
+
+  async getOutofStock(storeId: number) {
+    return await this.prisma.product.count({
+      where: { storeId, stock: { lte: 0 } },
     });
   }
 }
