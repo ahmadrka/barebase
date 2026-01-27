@@ -1,98 +1,210 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/ahmadrka/barestore/main/public/demo/logo-dark.png" width="120" alt="Logo" />
+
+<h1>BareBase API</h1>
+
+<p>
+Welcome to BareBase API, a web API for BareStore app that use POS (Point Of Sale) system, built by <a href="https://ahmadrka.com">Ahmadrka</a>, with NestJS framework.
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<a href="https://github.com/ahmadrka/barestore"><img src="https://img.shields.io/badge/BareStore-Frontend_Repo-blue?style=flat&logo=github"></a>
+<a href="https://github.com/ahmadrka/barebase"><img src="https://img.shields.io/badge/BareBase-Backend_Repo-red?style=flat&logo=github"></a>
+<a href="https://github.com/ahmadrka/barebase/releases"><img src="https://img.shields.io/github/downloads/ahmadrka/barebase/total?style=flat&logo=github&color=brightgreen"></a>
+<a href="https://github.com/ahmadrka/barebase/stargazers"><img src="https://img.shields.io/github/stars/ahmadrka/barebase?style=flat&logo=reverbnation&color=yellow"></a>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<br><br>
 
-## Description
+<h3><code>looking for API documentation? <a href="https://documenter.getpostman.com/view/50216756/2sBXVigpTH">view on Postman</a></code></h3>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+</div>
 
-## Project setup
+<br>
 
-```bash
-$ npm install
-```
+## Tech Stack
 
-## Compile and run the project
+### Core
 
-```bash
-# development
-$ npm run start
+- [Typescript](https://www.typescriptlang.org/)
 
-# watch mode
-$ npm run start:dev
+- [NestJS](https://nestjs.com/)
 
-# production mode
-$ npm run start:prod
-```
+- [Fastify](https://www.fastify.io/)
 
-## Run tests
+- [PostgreSQL](https://www.postgresql.org/)
 
-```bash
-# unit tests
-$ npm run test
+- [Prisma](https://www.prisma.io/)
 
-# e2e tests
-$ npm run test:e2e
+### Dependencies
 
-# test coverage
-$ npm run test:cov
-```
+- [Cloudinary](https://cloudinary.com/)
+
+- [Resend](https://resend.com/)
+
+- [Axios](https://axios-http.com/)
+
+- [Bycrypt](https://www.npmjs.com/package/bcrypt)
+
+- [Passport](https://www.passportjs.org/)
+
+- [Helmet](https://www.npmjs.com/package/@fastify/helmet)
+
+- [Multipart](https://www.npmjs.com/package/@fastify/multipart)
+
+- [Rate Limit](https://www.npmjs.com/package/@fastify/rate-limit)
+
+## Routes
+
+- **Authentication:** manage user identity and tokens.
+  - Signup using username, email and password with email verification.
+  - Signin using email and password, return access and refresh tokens.
+  - OAuth allows users to signin using Google, Microsoft or Facebook.
+  - Update Credentials for update email or password.
+  - Refresh access token with refresh token.
+  - Logout for delete refresh token.
+
+- **Users:** manage user profile and store access.
+  - Get user profile.
+  - Update user profile.
+  - Delete user profile.
+  - Join store with invitation or invite token.
+
+- **Stores:** manage store information.
+  - Get store information.
+  - Update store information.
+  - Delete store.
+
+- **Members:** manage store members.
+  - Get members.
+  - Update member.
+  - Delete member.
+
+- **Products:** manage products.
+  - Get products.
+  - Update product.
+  - Delete product.
+
+- **Categories:** manage product categories.
+  - Get categories.
+  - Update category.
+  - Delete category.
+
+- **Transactions:** manage user orders.
+  - Get orders.
+  - Update order.
+  - Delete order.
+
+- **API Service Information:** get API service health and information.
+
+## Database
+
+[![Database](https://raw.githubusercontent.com/ahmadrka/barebase/dev/dbdiagram.svg)](https://dbdiagram.io/d/BareStore-6937f02ae877c63074168e0a)
+
+## Features
+
+### Class Validator & Transformer
+
+- **Class Validator:** validate request data.
+
+- **Class Transformer:** transform request data.
+
+### Authentication & Authorization
+
+- **Login with Email and Password:** allows users to login using email and password.
+
+- **Hashed Passwords:** passwords are stored in hashed form in the database.
+
+- **Email Verification:** automatically sends emails for account creation or password reset.
+
+- **OAuth 2.0 Support:** user can login or signup using their Google, Microsoft or Facebook account.
+
+- **Multi-Tenancy Store:** user can only access and manage if they are members of the store.
+
+- **User and Store Role:** users can only access a feature if they have permission to do so.
+
+### File Upload
+
+- **File Upload:** allows users to upload files.
+
+- **File Format:** supports only image files.
+
+- **File Size:** supports only 5MB files.
+
+### POS (Point Of Sale)
+
+- **Store:**
+
+- **Products:**
+
+- **Staffs:**
+
+- **Transactions:**
 
 ## Deployment
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### Deployment Demo
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+\*_use Postman or any other API client to test demo_
+
+<div align="center">
+
+<h4>You can see live demo in here</h4>
+
+<h4>👉 <a href="https://api.barestore.ahmadrka.com">https://api.barestore.ahmadrka.com</a> 👈</h4>
+
+Backend Hosted on <a href="https://koyeb.com">Koyeb</a>
+Database Hosted on <a href="https://neon.com">Neon</a>
+
+</div>
+
+### Deployment Setup
+
+1. Make sure you have installed [**Node.js**](https://nodejs.org/) (v18+ recommended).
+
+2. Clone or download [this repository](https://github.com/ahmadrka/barebase).
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+
+git clone https://github.com/ahmadrka/barebase.git
+
+cd barebase
+
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+3. Download all dependencies modules.
 
-## Resources
+```bash
 
-Check out a few resources that may come in handy when working with NestJS:
+npm install
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```
 
-## Support
+4. Copy environment example file for reference
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
 
-## Stay in touch
+cp .env.example .env
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```
 
-## License
+5. Now, you can run the server,
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```bash
+
+npm run start:dev
+
+```
+
+then, server will running on [http://localhost:3000](http://localhost:3000)
+
+6. Or, you can also run server with production mode.
+
+```bash
+
+npm run build
+
+npm run start:prod
+
+```
+
+Congrats, now you running this BareBase API.
