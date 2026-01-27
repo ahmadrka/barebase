@@ -170,7 +170,7 @@ model Product {
   price       Decimal       @default(0) @db.Decimal(18, 2)
   description String?       @db.VarChar(255)
   stock       Int           @default(1)
-  sku         String?
+  sku         String? 
   plu         String?
   barcode     String?       @db.VarChar(50)
   categoryId  Int?          @map("category_id")
@@ -188,7 +188,6 @@ model Product {
   store    Store          @relation(fields: [storeId], references: [storeId], onDelete: Cascade)
   category Category?      @relation(fields: [categoryId], references: [categoryId], onDelete: SetNull)
 
-  @@unique([storeId, sku])
   @@index([storeId, title])
   @@index([barcode])
   @@index([plu])
@@ -245,6 +244,8 @@ model Transaction {
   items       CartItem[]
   store       Store             @relation(fields: [storeId], references: [storeId], onDelete: Cascade)
   member      Member            @relation(fields: [memberId], references: [memberId], onDelete: Cascade)
+
+  @@map("transactions")
 }
 
 enum PaymentMethod {
@@ -265,10 +266,12 @@ enum TransactionStatus {
 model CartItem {
   id            Int         @id @default(autoincrement())
   transactionId Int         @map("transaction_id")
-  productId     Int         @map("product_id")
-  amount        Int         @default(1)
+  productId     Int      @map("product_id")
+  quantity      Int         @default(1)
   price         Decimal     @default(0) @db.Decimal(18, 2)
   
   transaction   Transaction @relation(fields: [transactionId], references: [id])
   product       Product     @relation(fields: [productId], references: [productId], onDelete: Cascade)
+
+  @@map("cart_items")
 }

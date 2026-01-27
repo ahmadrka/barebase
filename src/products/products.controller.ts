@@ -82,7 +82,7 @@ export class ProductsController {
     @Param('storeId') storeId: string,
     @GetUser('userId') userId: string,
   ) {
-    return this.productsService.deleteProduct(+productId, +storeId, +userId);
+    return this.productsService.deleteProduct(productId, +storeId, +userId);
   }
 
   // Upload product image

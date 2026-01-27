@@ -1,25 +1,33 @@
 import { PaymentMethod } from 'src/generated/prisma/enums';
+import {
+  IsEnum,
+  IsNumber,
+  IsPositive,
+  IsArray,
+  ValidateNested,
+} from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreateTransactionDto {
-  storeId: number;
-  memberId: number;
+  @IsEnum(PaymentMethod)
   method: PaymentMethod;
-  createdAt: string;
-  products: [
-    {
-      productId: number;
-      amount: number;
-      price: number;
-    },
-    {
-      productId: number;
-      amount: number;
-      price: number;
-    },
-    {
-      productId: number;
-      amount: number;
-      price: number;
-    },
-  ];
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => Product)
+  products: Array<Product>;
+}
+
+class Product {
+  @IsNumber()
+  @IsPositive()
+  productId: number;
+
+  @IsNumber()
+  @IsPositive()
+  quantity: number;
+
+  @IsNumber()
+  @IsPositive()
+  price: number;
 }
