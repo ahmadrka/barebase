@@ -1,98 +1,226 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+<div align="center">
+
+<a href="https://barestore.ahmadrka.com" target="_blank"><img src="https://raw.githubusercontent.com/ahmadrka/barebase/main/logo.png" width="120" alt="Logo" /></a>
+
+<h1>BareBase API</h1>
+
+<p>
+Welcome to BareBase API, a web API for BareStore app that use POS (Point Of Sale) system, built by <a href="https://ahmadrka.com">Ahmadrka</a>, with NestJS framework.
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<a href="https://github.com/ahmadrka/barestore"><img src="https://img.shields.io/badge/BareStore-Frontend_Repo-blue?style=flat&logo=github"></a>
+<a href="https://github.com/ahmadrka/barebase"><img src="https://img.shields.io/badge/BareBase-Backend_Repo-red?style=flat&logo=github"></a>
+<a href="https://github.com/ahmadrka/barebase/releases"><img src="https://img.shields.io/github/downloads/ahmadrka/barebase/total?style=flat&logo=github&color=brightgreen"></a>
+<a href="https://github.com/ahmadrka/barebase/stargazers"><img src="https://img.shields.io/github/stars/ahmadrka/barebase?style=flat&logo=reverbnation&color=yellow"></a>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<br><br>
 
-## Description
+<h3><code>looking for API documentation? <a href="https://documenter.getpostman.com/view/50216756/2sBXVigpTH">view on Postman</a></code></h3>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+</div>
 
-## Project setup
+<br>
+
+## ⚙️ Tech Stack
+
+### Core
+
+- [Typescript](https://www.typescriptlang.org/)
+- [NestJS](https://nestjs.com/)
+- [Fastify](https://www.fastify.io/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Prisma](https://www.prisma.io/)
+
+### Dependencies
+
+- [Cloudinary](https://cloudinary.com/)
+- [Resend](https://resend.com/)
+- [Axios](https://axios-http.com/)
+- [Bycrypt](https://www.npmjs.com/package/bcrypt)
+- [Passport](https://www.passportjs.org/)
+- [Helmet](https://www.npmjs.com/package/@fastify/helmet)
+- [Multipart](https://www.npmjs.com/package/@fastify/multipart)
+- [Rate Limit](https://www.npmjs.com/package/@fastify/rate-limit)
+
+## 📍 Routes
+
+- **Authentication:** manage user identity and tokens.
+  - Signup using username, email and password with email verification.
+  - Signin using email and password, return access and refresh tokens.
+  - OAuth allows users to signin using Google, Microsoft or Facebook.
+  - Update Credentials for update email or password.
+  - Refresh access token with refresh token.
+  - Logout for delete refresh token.
+- **Users:** manage user profile and store access.
+  - Get user profile.
+  - Update user profile.
+  - Delete user profile.
+  - Join store with invitation or invite token.
+- **Stores:** manage store information.
+  - Get store information.
+  - Update store information.
+  - Delete store.
+- **Members:** manage store members.
+  - Get members.
+  - Update member.
+  - Delete member.
+- **Products:** manage products.
+  - Get products.
+  - Update product.
+  - Delete product.
+- **Categories:** manage product categories.
+  - Get categories.
+  - Update category.
+  - Delete category.
+- **Transactions:** manage user orders.
+  - Get orders.
+  - Update order.
+  - Delete order.
+- **API Service Information:** get API service health and information.
+
+## 🗄️ Database
+
+This API use **PostgreSQL** database with **Prisma ORM** to connect with database.
+
+See [Database Diagram](https://dbdiagram.io/d/BareStore-6937f02ae877c63074168e0a) on dbdiagram.io.
+
+<details>
+<summary><b>📊 Database Diagram</b> <i>(click to view diagram)</i></summary>
+<a href="https://dbdiagram.io/d/BareStore-6937f02ae877c63074168e0a" target="_blank"><img src="https://raw.githubusercontent.com/ahmadrka/barebase/main/dbdiagram.svg" alt="Database"/></a>
+</details>
+
+## 📖 Features
+
+### Class Validator & Transformer
+
+- **Class Validator:** validate request data.
+- **Class Transformer:** transform request data.
+
+### Authentication & Authorization
+
+- **Authentication:** allows users to login using email and password.
+- **User Registration:** allows users to register using username, email and password with email verification.
+- **Email Verification:** automatically sends emails for account creation or password reset.
+- **OAuth 2.0 Support:** user can login or signup using their Google, Microsoft or Facebook account.
+
+### Security
+
+- **Multi-Tenancy Store:** user can only access and manage if they are members of the store.
+- **Role-Based Access Control:** users can only access a feature if they have permission to do so.
+- **Rate Limit:** limits the number of requests a user can make in a given time period.
+- **Hashed Passwords:** passwords are securely stored in hashed form in the database.
+
+### File Upload
+
+- **File Upload:** allows users to upload files.
+- **File Format:** supports only image files.
+- **File Size:** supports only 5MB files.
+
+## 📦 Deployment
+
+### Deployment Demo
+
+\*_use Postman or any other API client to test demo_
+
+<div align="center">
+
+<h4>You can see live demo in here</h4>
+
+<!-- <h4>👉 <a href="https://api.barestore.ahmadrka.com">https://api.barestore.ahmadrka.com</a> 👈</h4> -->
+<h4>👉 <a href="https://static-helaina-ahmadrika-c5f3f116.koyeb.app">https://static-helaina-ahmadrika-c5f3f116.koyeb.app</a> 👈</h4>
+
+Backend Hosted on <a href="https://koyeb.com">Koyeb</a>,
+Database Hosted on <a href="https://neon.com">Neon</a>
+
+</div>
+
+### Deployment Setup
+
+1. Make sure you have installed [**Node.js**](https://nodejs.org/) (v18+ recommended).
+
+2. Clone or download [this repository](https://github.com/ahmadrka/barebase).
 
 ```bash
-$ npm install
+
+git clone https://github.com/ahmadrka/barebase.git
+
+cd barebase
+
 ```
 
-## Compile and run the project
+3. Download all dependencies modules.
 
 ```bash
-# development
-$ npm run start
 
-# watch mode
-$ npm run start:dev
+npm install
 
-# production mode
-$ npm run start:prod
 ```
 
-## Run tests
+4. Set environment variables, or copy environment example file for reference.
 
 ```bash
-# unit tests
-$ npm run test
 
-# e2e tests
-$ npm run test:e2e
+cp .env.example .env
 
-# test coverage
-$ npm run test:cov
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+5. Set connection string, make sure you have set the connection string in the .env file.
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+
+npx prisma generate && npx prisma migrate dev
+
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+6. Now, you can run the server,
 
-## Resources
+```bash
 
-Check out a few resources that may come in handy when working with NestJS:
+# Run command
+npm run start:dev
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```
 
-## Support
+then, server will running on [http://localhost:3001](http://localhost:3001) by default.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+7. Or, you can also run server with production mode.
 
-## Stay in touch
+```bash
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Build command
+npm install && npx prisma generate && npm run build
 
-## License
+# Run command
+npx prisma migrate deploy && npm run start:prod
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```
+
+Congrats, now you running this BareBase Backend API app.
+
+### Common Issues
+
+<details>
+
+<summary><b>Unable to start the project.</b></summary>
+
+<p>Node.js is not installed or not running, or you have not installed all dependencies modules.</p>
+
+<p><b>Solution: </b>make sure you have installed <a href="https://nodejs.org/">Node.js</a> (v18+ recommended), and run <code>npm install</code> to download all dependencies modules.</p>
+
+</details>
+<details>
+<summary><b>Project has started but <code>Connection refused</code> error.</b></summary>
+
+<p>You opened the incorrect port or maybe there is another project running on the same port.</p>
+
+<p><b>Solution: </b>check project port in console when you run the project, or set port in <code>.env</code> file. Make sure you open the same port in your frontend or API client.</p>
+
+</details>
+<details>
+<summary><b>Error <code>P2021: The table ... does not exist.</code></b></summary>
+
+<p>You opened the incorrect port or maybe there is another project running on the same port.</p>
+
+<p><b>Solution: </b>check project port in console when you run the project, or set port in <code>.env</code> file. Make sure you open the same port in your frontend or API client.</p>
+
+</details>

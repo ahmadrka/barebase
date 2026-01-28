@@ -146,7 +146,27 @@ export class ProductsService {
     );
   }
 
-  deleteProduct(productId: number, storeId: number, userId: number) {}
+  async deleteProduct(productId: string, storeId: number, userId: number) {
+    const member = await this.memberRepo.findOne(storeId, userId);
+    if (!member) {
+      throw new UnauthorizedException({
+        message: 'You are not a member of this store',
+        errorCode: ErrorCode.FORBIDDEN_RESOURCE,
+        statusCode: HttpStatus.FORBIDDEN,
+      });
+    }
+
+    const product = await this.productRepo.findOne(productId, storeId);
+    if (!product) {
+      throw new NotFoundException({
+        message: 'Product not found',
+        errorCode: ErrorCode.PRODUCT_NOT_FOUND,
+        statusCode: HttpStatus.NOT_FOUND,
+      });
+    }
+
+    return this.productRepo.deleteProduct(+product.productId, storeId);
+  }
 
   // Upload product image
   async uploadImage(

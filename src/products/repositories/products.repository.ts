@@ -47,11 +47,25 @@ export class ProductRepository {
     });
   }
 
+  async findMany(storeId: number, productIds: number[]) {
+    return await this.prisma.product.findMany({
+      where: {
+        deletedAt: null,
+        storeId,
+        productId: {
+          in: productIds,
+        },
+      },
+      select: productSelections,
+    });
+  }
+
   async findOne(productId: string, storeId: number) {
     return await this.prisma.product.findUnique({
       where: {
         deletedAt: null,
-        storeId_sku: { sku: productId, storeId },
+        productId: parseInt(productId),
+        storeId,
       },
       select: productSelections,
     });

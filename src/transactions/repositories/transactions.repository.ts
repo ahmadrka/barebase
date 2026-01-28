@@ -28,12 +28,23 @@ export class TransactionsRepository {
   createTransaction(
     createTransactionDto: CreateTransactionDto,
     storeId: number,
+    memberId: number,
   ) {
     return this.prisma.transaction.create({
       data: {
-        ...createTransactionDto,
+        method: createTransactionDto.method,
         storeId,
-        memberId: createTransactionDto.memberId,
+        memberId,
+        items: {
+          create: createTransactionDto.products.map((item) => ({
+            productId: item.productId,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+        },
+      },
+      include: {
+        items: true,
       },
     });
   }
